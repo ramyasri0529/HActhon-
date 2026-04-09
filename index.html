@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTest AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-robot"></i>
+                <h1>AutoTest AI</h1>
+            </div>
+            <p>Automated test generation and coverage for your Python code.</p>
+        </header>
+
+        <main>
+            <div class="panel glass-panel input-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-brands fa-python"></i> Source Code</h2>
+                    <button id="generateBtn" class="primary-btn">
+                        <span>Generate Tests</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                </div>
+                <textarea id="sourceCode" spellcheck="false" placeholder="Paste your Python code here...&#10;&#10;class Calculator:&#10;    def add(self, a, b):&#10;        return a + b"></textarea>
+            </div>
+
+            <div class="panel glass-panel output-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-flask"></i> Generated Output</h2>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="tests">Test Code</button>
+                        <button class="tab-btn" data-tab="analysis">AST Analysis</button>
+                        <button class="tab-btn" data-tab="coverage">Coverage</button>
+                    </div>
+                </div>
+                
+                <div id="loader" class="loader-container hidden">
+                    <div class="spinner"></div>
+                    <p>AI is analyzing code and generating tests...</p>
+                </div>
+
+                <div class="tab-content relative">
+                    <div id="tests" class="tab-pane active">
+                        <textarea id="testCodeOut" class="readonly-editor" readonly placeholder="Your generated tests will appear here..."></textarea>
+                    </div>
+                    <div id="analysis" class="tab-pane">
+                        <textarea id="analysisOut" class="readonly-editor" readonly placeholder="AST Summary..."></textarea>
+                    </div>
+                    <div id="coverage" class="tab-pane">
+                        <textarea id="coverageOut" class="readonly-editor" readonly placeholder="Test Coverage Report..."></textarea>
+                    </div>
+                    <!-- Copy to clipboard button overlay -->
+                    <button class="icon-btn copy-btn" id="copyBtn" aria-label="Copy code">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
